@@ -1,0 +1,25 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+//  Here we used the tortoise and hare concept again.
+//  Here logic is that if cycle is present in the linked list, there will be condition when hare and tortoise will present at the same node of linked list.
+//  Otherwise the hare will reach the end if loop is not present
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+     
+        ListNode* temp=head;
+              ListNode* temp1=head;
+        while(temp1!=NULL && temp1->next!=NULL){
+      
+        temp=temp->next;
+        temp1=temp1->next->next;  if(temp==temp1)return true;
+        }
+        return false;
+    }
+};
