@@ -1,0 +1,54 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+
+ /* 
+ First count which linked list is greater.
+ Move the greater linked list to the node from which both the linked list will have equal length
+ Now check the node where they intersect and return answer.
+
+ T.C : O(N)  N is length of highest Linked List
+ S.C : O(1) 
+ */
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode* temp1=headA;
+        ListNode* temp2=headB;
+        int ct2=0,ct1=0;
+        while(temp1!=NULL){
+            temp1=temp1->next;
+            ct1++;
+        }
+         while(temp2!=NULL){
+            temp2=temp2->next;
+            ct2++;
+        }
+        temp1=headA;
+        temp2=headB;
+        if(ct2>ct1)
+        {
+            int k =ct2-ct1;
+            while(k--){
+                temp2=temp2->next;
+            }
+        }
+        else if(ct1>ct2){
+int k =ct1-ct2;
+ while(k--){
+                temp1=temp1->next;
+            }
+        }
+       
+   while(temp1!=NULL){
+    if(temp1==temp2)return temp1;
+       temp1=temp1->next;  temp2=temp2->next;
+   }
+   return NULL;
+    }
+};
