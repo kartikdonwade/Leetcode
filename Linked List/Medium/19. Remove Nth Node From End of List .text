@@ -1,0 +1,43 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+ /* 
+
+ we will move the fast to the nth position. then slow and fast will move with the same spped until fast reaches the end.
+ Now we will delete the node pointed with slow.
+ T.C : O(N)
+ S.C : O(1) 
+ 
+ */
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* fast=head;
+         ListNode* slow=head;
+    
+        while(n--){
+            fast=fast->next;
+
+        }
+        if(fast==NULL){
+            return head->next;
+        
+        }
+        while(fast->next!=NULL){
+            fast=fast->next;
+            slow=slow->next;
+        }
+        ListNode* del = slow->next;
+        slow->next=slow->next->next;
+        delete del;
+        //free(del);
+        return head;
+    }
+};
