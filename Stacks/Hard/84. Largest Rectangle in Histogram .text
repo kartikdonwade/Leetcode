@@ -1,0 +1,55 @@
+class Solution {
+public:
+/* Here we are taking two array. From left and from right.
+Firstly we will fill the left array where we will add a value of index upto which current index can move.
+For calculating it we will use stack.
+We will check if value of top index is less than or not. 
+Hard to explain look code will get easily understood
+
+*/
+    int largestRectangleArea(vector<int>& heights) {
+        stack <int> st;
+        int n= heights.size();
+        int l[n],r[n];
+        for(int i =0;i<n;i++){
+            while(!st.empty() && heights[st.top()]>=heights[i]){
+                st.pop();
+
+            }
+        if(st.empty()){
+            l[i]=0;
+        }
+        else {
+            l[i]=st.top()+1;
+           
+        } st.push(i);
+        }
+
+        while(!st.empty())st.pop();
+         for(int i =n-1;i>=0;i--){
+            while(!st.empty() && heights[st.top()]>=heights[i]){
+                st.pop();
+
+            }
+        if(st.empty()){
+            r[i]=n-1;
+        }
+        else {
+            r[i]=st.top()-1;
+           
+        } st.push(i);
+        }
+        int ans=0;
+for(int i=0;i<n;i++){
+    int k=r[i]-l[i];
+    k++;
+    int temp = k*heights[i];
+    cout<<temp<< " ";
+    if(temp>ans)ans=temp;
+}
+// for(int i=0;i<n;i++)cout<<l[i]<<" ";
+// cout<<endl;
+//         for(int i=0;i<n;i++)cout<<r[i]<<" ";
+        return ans;
+    }
+};
